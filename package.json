@@ -1,0 +1,14 @@
+{
+  "name": "leaderboard-dice-game",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently \"npm run dev:frontend\" \"npm run dev:backend\"",
+    "dev:frontend": "npm --prefix apps/frontend run dev",
+    "dev:backend": "cd apps/backend && uvicorn app.main:app --reload",
+    "build": "npm --prefix apps/frontend run build",
+    "start": "npm --prefix apps/frontend run start"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}

@@ -1,0 +1,24 @@
+# node
+node_modules/
+
+# python
+venv/
+.venv/
+
+# environment variables
+.env
+
+# logs
+*.log
+
+# system
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode
+.idea
+
+# build artifacts
+dist/
+build/
