@@ -2,8 +2,8 @@
 node_modules/
 
 # python
-venv/
-.venv/
+backend/venv/
+backend/.venv/
 
 # environment variables
 .env

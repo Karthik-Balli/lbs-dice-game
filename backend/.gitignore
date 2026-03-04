@@ -9,6 +9,16 @@ venv/
 env/
 .venv/
 
+# Lib
+Lib/
+
+# exe
+*.exe
+
+# config
+*.cfg
+*.ini
+
 # environment variables
 .env
 
