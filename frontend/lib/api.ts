@@ -4,7 +4,13 @@ const API = axios.create({
   baseURL: "http://localhost:8000"
 })
 
-export const rollDice = async (user: string) => {
+export interface RollDiceResponse {
+  user: string
+  rolls: number[]
+  total_added: number
+}
+
+export const rollDice = async (user: string): Promise<RollDiceResponse> => {
   const res = await API.post(`/roll-dice/${user}`)
   return res.data
 }

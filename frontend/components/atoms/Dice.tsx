@@ -1,20 +1,32 @@
 "use client"
 
-import { motion } from "framer-motion"
+import React, { forwardRef } from "react";
+import Dice from "react-dice-roll";
 
-interface Props {
-  value: number
+// 1. Define the interface for the methods the Dice component provides
+export interface DiceRef {
+  roll: (value?: number) => void;
 }
 
-export default function Dice({ value }: Props) {
+// 2. Define the component props (empty for now, or add custom ones)
+interface DiceComponentProps {
+  onRoll?: (value: number) => void;
+  defaultValue?: number;
+}
 
+const DiceComponent = forwardRef<DiceRef, DiceComponentProps>((props, ref) => {
   return (
-    <motion.div
-      animate={{ rotate: 360 }}
-      transition={{ duration: 0.6 }}
-      className="w-24 h-24 neo flex items-center justify-center text-4xl font-bold"
-    >
-      {value}
-    </motion.div>
-  )
-}
+    <div className="neo p-6 flex items-center justify-center">
+      <Dice 
+        {...props}
+        ref={ref} 
+        size={120} 
+      />
+    </div>
+  );
+});
+
+// 3. Set displayName for easier debugging in React DevTools
+DiceComponent.displayName = "DiceComponent";
+
+export default DiceComponent;

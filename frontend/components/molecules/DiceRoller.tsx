@@ -1,48 +1,49 @@
 "use client"
 
-import { useState } from "react"
+import { useRef, useState } from "react"
 import Dice from "../atoms/Dice"
 import { rollDice } from "@/lib/api"
 import { Button } from "@/components/ui/button"
 
-interface DiceRollerProps {
-  user: { id: string; name: string }
-  refresh: () => void
-}
+export default function DiceRoller({ user, refresh }: any) {
 
-export default function DiceRoller({ user, refresh }: DiceRollerProps) {
-
-  const [dice, setDice] = useState(1)
+  const diceRef = useRef<any>(null)
   const [loading, setLoading] = useState(false)
+
+  const sleep = (ms: number) =>
+    new Promise((resolve) => setTimeout(resolve, ms))
 
   const handleRoll = async () => {
 
     setLoading(true)
 
-    const res = await rollDice(user.id)
+    const result = await rollDice(user)
 
-    const rolls = res.rolls
+    const rolls = result.rolls
 
     for (const r of rolls) {
-      await new Promise((resolve) => setTimeout(resolve, 600))
-      setDice(r)
+
+      diceRef.current.rollDice(r)
+
+      await sleep(900)
     }
 
     refresh()
+
     setLoading(false)
   }
 
   return (
-    <div className="flex flex-col items-center gap-4">
+    <div className="flex flex-col items-center gap-6">
 
-      <Dice value={dice} />
+      <Dice ref={diceRef} />
 
       <Button
-        className="bg-primary text-black"
-        disabled={loading}
+        className="bg-[#bee800] text-black px-6 py-2"
         onClick={handleRoll}
+        disabled={loading}
       >
-        Roll Dice
+        {loading ? "Rolling..." : "Roll Dice"}
       </Button>
 
     </div>

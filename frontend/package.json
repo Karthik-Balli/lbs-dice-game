@@ -17,6 +17,7 @@
     "next": "16.1.6",
     "radix-ui": "^1.4.3",
     "react": "19.2.3",
+    "react-dice-roll": "^1.2.2",
     "react-dom": "19.2.3",
     "tailwind-merge": "^3.5.0"
   },
