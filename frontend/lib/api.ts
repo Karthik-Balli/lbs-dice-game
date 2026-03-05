@@ -4,28 +4,59 @@ const API = axios.create({
   baseURL: "http://localhost:8000"
 })
 
-export interface RollDiceResponse {
+/* -----------------------------
+   TYPES
+------------------------------ */
+
+export interface DiceEvent {
   user: string
-  rolls: number[]
-  total_added: number
+  score: number
 }
 
-export const rollDice = async (user: string): Promise<RollDiceResponse> => {
-  const res = await API.post(`/roll-dice/${user}`)
+export interface LeaderboardPlayer {
+  rank: number
+  user: string
+  score: number
+}
+
+export interface RankResponse {
+  user: string
+  rank: number
+}
+
+/* -----------------------------
+   API CALLS
+------------------------------ */
+
+// roll dice for all players
+export const rollDice = async (): Promise<DiceEvent[]> => {
+  const res = await API.post("/roll-dice")
   return res.data
 }
 
-export const getTopK = async (k: number) => {
+// fetch top k leaderboard
+export const getTopK = async (k: number): Promise<LeaderboardPlayer[]> => {
   const res = await API.get(`/top-k/${k}`)
   return res.data
 }
 
-export const getRank = async (user: string) => {
+// fetch player rank
+export const getRank = async (user: string): Promise<RankResponse> => {
   const res = await API.get(`/rank/${user}`)
   return res.data
 }
 
-export const getRange = async (start: number, end: number) => {
+// fetch leaderboard range
+export const getRange = async (
+  start: number,
+  end: number
+): Promise<LeaderboardPlayer[]> => {
   const res = await API.get(`/range?start=${start}&end=${end}`)
+  return res.data
+}
+
+// fetch all users
+export const getUsers = async (): Promise<string[]> => {
+  const res = await API.get(`/users`)
   return res.data
 }

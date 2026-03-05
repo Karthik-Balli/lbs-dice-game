@@ -36,17 +36,20 @@ class LeaderboardService:
         for i in range(1, k + 1):
 
             node = self.treap.kth(i)
-
+    
             if not node:
                 break
-
+            
             score = -node.key[0]
             user = node.key[1]
-
-            result.append((user, score))
+    
+            result.append({
+                "rank": i,
+                "user": user,
+                "score": score
+            })
 
         return result
-
 
     def get_rank(self, user_id):
 

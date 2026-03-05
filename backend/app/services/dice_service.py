@@ -3,28 +3,30 @@ import random
 
 class DiceService:
 
-    def __init__(self, leaderboard):
+    def __init__(self, leaderboard, users):
 
         self.leaderboard = leaderboard
+        self.users = users
 
 
-    def roll_dice(self, user_id):
+    def roll_for_all(self):
 
-        rolls = []
+        events = []
 
-        while True:
+        for user in self.users:
 
-            dice = random.randint(1, 6)
+            while True:
 
-            rolls.append(dice)
+                roll = random.randint(1,6)
 
-            self.leaderboard.update_score(user_id, dice)
+                self.leaderboard.update_score(user, roll)
 
-            if dice < 6:
-                break
+                events.append({
+                    "user": user,
+                    "score": roll
+                })
 
-        return {
-            "user": user_id,
-            "rolls": rolls,
-            "total_added": sum(rolls)
-        }
+                if roll < 6:
+                    break
+
+        return events
