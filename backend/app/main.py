@@ -8,7 +8,7 @@ app = FastAPI(title="Dice Leaderboard API")
 
 origins = [
     "http://localhost:3000",
-    "https://lbs-dice-game.vercel.app/"
+    "https://lbs-dice-game.vercel.app"
 ]
 
 app.add_middleware(
