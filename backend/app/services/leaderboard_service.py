@@ -66,17 +66,21 @@ class LeaderboardService:
     def get_players_in_range(self, start, end):
 
         result = []
-
+    
         for i in range(start, end + 1):
-
+        
             node = self.treap.kth(i)
-
+    
             if not node:
                 break
-
+            
             score = -node.key[0]
             user = node.key[1]
-
-            result.append((user, score))
-
+    
+            result.append({
+                "rank": i,
+                "user": user,
+                "score": score
+            })
+    
         return result
