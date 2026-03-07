@@ -11,7 +11,7 @@ export interface DiceRef {
 // 2. Define the component props (empty for now, or add custom ones)
 interface DiceComponentProps {
   onRoll?: (value: number) => void;
-  defaultValue?: number;
+  defaultValue?: 1 | 2 | 3 | 4 | 5 | 6;
 }
 
 const DiceComponent = forwardRef<DiceRef, DiceComponentProps>((props, ref) => {
@@ -19,7 +19,6 @@ const DiceComponent = forwardRef<DiceRef, DiceComponentProps>((props, ref) => {
     <div className="neo p-6 flex items-center justify-center">
       <Dice 
         {...props}
-        ref={ref} 
         size={120} 
       />
     </div>
